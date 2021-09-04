@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chat',
+    'channels',
     
 ]
 
@@ -70,10 +71,22 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'groupchat.wsgi.application'
+ASGI_APPLICATION = 'groupchat.asgi.application'
+
+
 
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 DATABASES = {
     'default': {
